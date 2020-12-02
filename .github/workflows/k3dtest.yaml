@@ -1,0 +1,25 @@
+name: k3d-test
+
+on:
+  [ workflow_dispatch, push ]
+
+jobs:
+  some-job:
+    steps:
+      - uses: nolar/setup-k3d-k3s@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version: v1.19.4
+          k3d-name: test-gslb1
+#          k3d-args: -p "80:80@agent[0]" -p "443:443@agent[0]" -p "5053:53/udp@agent[0]" --agents 1 --no-lb --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server" --network bridge
+#      - name: Create 2nd k3d Cluster
+#        uses: nolar/setup-k3d-k3s@v1
+#        with:
+#          version: v1.19.4+k3s1
+#          k3d-name: test-gslb2
+#          k3d-args: -p "81:80@agent[0]" -p "444:443@agent[0]" -p "5054:53/udp@agent[0]" --agents 1 --no-lb --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server" --network bridge
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: K8GB deployment
+#        run: make deploy-full-terratest-setup
+#      - name: Terratest
+#        run: make terratest
