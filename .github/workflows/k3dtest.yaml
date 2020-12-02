@@ -9,6 +9,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: nolar/setup-k3d-k3s@v1
-        with:
-          version: v1
-          k3d-name: test-gslb1
