@@ -11,7 +11,7 @@ jobs:
       - name: Install golang linting tools
         run: GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
       - uses: kuritka/k3d-action@v0.0.4
-        name: "test-cluster-1"
+        k3d-name: "test-cluster-1"
         k3d-args: >-
           -p "80:80@agent[0]" -p "443:443@agent[0]" -p "5053:53/udp@agent[0]"
           --agents 3 --no-lb --network bridge
