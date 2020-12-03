@@ -10,16 +10,22 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install golang linting tools
         run: GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
+
       - uses: kuritka/k3d-action@v0.0.4
-        k3d-name: "test-cluster-1"
-        k3d-args: >-
-          -p "80:80@agent[0]" -p "443:443@agent[0]" -p "5053:53/udp@agent[0]"
-          --agents 3 --no-lb --network bridge
-          --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
+        name: "test-cluster-1 on bridge network"
+        with:
+          k3d-name: "test-cluster-1"
+          k3d-args: >-
+            -p "80:80@agent[0]" -p "443:443@agent[0]" -p "5053:53/udp@agent[0]"
+            --agents 3 --no-lb --network bridge
+            --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
+
       - uses: kuritka/k3d-action@v0.0.4
-        k3d-name: "test-cluster-2"
-        k3d-args: >-
-          -p "81:80@agent[0]" -p "444:443@agent[0]" -p "5054:53/udp@agent[0]"
-          --network bridge
-          --agents 3 --no-lb --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
-      - run: make
+        name: "test-cluster-2 on bridge network"
+        with:
+          k3d-name: "test-cluster-2"
+          k3d-args: >-
+            -p "81:80@agent[0]" -p "444:443@agent[0]" -p "5054:53/udp@agent[0]"
+            --network bridge
+            --agents 3 --no-lb --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
+        - run: make
