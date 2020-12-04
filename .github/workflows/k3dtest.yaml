@@ -4,13 +4,13 @@ on:
   [workflow_dispatch, push]
 jobs:
   k3d-inspect:
-    name: Multi cluster on the common bridge network
+    name: Multi-cluster test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Create k3d-action-bridge-network
         run: docker network create --driver=bridge --subnet=172.16.0.0/24 k3d-action-bridge-network
-      - uses: kuritka/k3d-action@v0.0.4
+      - uses: kuritka/k3d-action@v0.0.5
         name: "test-cluster-1 on bridge network"
         with:
           k3d-name: "test-cluster-1"
@@ -24,7 +24,7 @@ jobs:
             --network k3d-action-bridge-network
             --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
 
-      - uses: kuritka/k3d-action@v0.0.4
+      - uses: kuritka/k3d-action@v0.0.5
         name: "test-cluster-2 on bridge network"
         with:
           k3d-name: "test-cluster-2"
@@ -40,7 +40,7 @@ jobs:
 
 
       - name: Nodes
-        # hack, sleep is there to wait until all nodes are created.
+        # hack, wait until agents are ready.
         run: |
           docker ps -a
           kubectl config use-context k3d-test-cluster-1
