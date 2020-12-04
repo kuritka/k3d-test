@@ -7,8 +7,9 @@ jobs:
     name: Multi cluster on the common bridge network
     runs-on: ubuntu-latest
     steps:
-
       - uses: actions/checkout@v2
+      - name: Create k3d-action-bridge-network
+        run: docker network create --driver=bridge --subnet=172.16.0.0/24 k3d-action-bridge-network
       - uses: kuritka/k3d-action@v0.0.4
         name: "test-cluster-1 on bridge network"
         with:
@@ -20,7 +21,7 @@ jobs:
             -p "5053:53/udp@agent[0]"
             --agents 3
             --no-lb
-            --network bridge
+            --network k3d-action-bridge-network
             --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
 
       - uses: kuritka/k3d-action@v0.0.4
@@ -32,20 +33,24 @@ jobs:
             -p "81:80@agent[0]"
             -p "444:443@agent[0]"
             -p "5054:53/udp@agent[0]"
-            --network bridge
             --agents 3
             --no-lb
+            --network k3d-action-bridge-network
             --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
 
-      - run: |
+
+      - name: Nodes
+        # hack, sleep is there to wait until all nodes are created.
+        run: |
+          docker ps -a
+          kubectl config use-context k3d-test-cluster-1
+          sleep 5
+          kubectl get nodes -o wide
           kubectl config use-context k3d-test-cluster-2
           kubectl get nodes -o wide
-          kubectl cluster-info --context k3d-test-cluster-1 && kubectl cluster-info --context k3d-test-cluster-2
-        name: cluster info
-      - run: docker ps -a
-      - run: docker network inspect bridge
-#      - run: |
-#          GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
-#          export PATH=~/go/bin:$PATH
-#          make
+
+      - run: |
+          GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
+          export PATH=~/go/bin:$PATH
+          make
 
