@@ -37,12 +37,15 @@ jobs:
             --no-lb
             --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
 
-      - run: kubectl cluster-info --context k3d-test-cluster-1 && kubectl cluster-info --context k3d-test-cluster-2
+      - run: |
+          kubectl config use-context k3d-test-cluster-2
+          kubectl get nodes -o wide
+          kubectl cluster-info --context k3d-test-cluster-1 && kubectl cluster-info --context k3d-test-cluster-2
         name: cluster info
       - run: docker ps -a
       - run: docker network inspect bridge
-      - run: |
-          GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
-          export PATH=~/go/bin:$PATH
-          make
+#      - run: |
+#          GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
+#          export PATH=~/go/bin:$PATH
+#          make
 
