@@ -35,10 +35,10 @@ jobs:
             --no-lb
             --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
 
-      - run: |
-          GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
-          export PATH=~/go/bin:$PATH
-          make
+#      - run: |
+#          GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
+#          export PATH=~/go/bin:$PATH
+#          make
 
       - run: kubectl cluster-info --context k3d-test-cluster-1 && kubectl cluster-info --context k3d-test-cluster-2
         name: cluster info
