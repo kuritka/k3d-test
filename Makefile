@@ -4,6 +4,8 @@ CLUSTER2 = test-cluster-2
 run:
 	golangci-lint run
 	go run app.go
+	kubectl get nodes -o wide
+	kubectl config current-context
 	$(call get-host-alias-ip,k3d-$(CLUSTER1),k3d-$(CLUSTER2))
 	$(call get-host-alias-ip,k3d-$(CLUSTER2),k3d-$(CLUSTER1))
 
