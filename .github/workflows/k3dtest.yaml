@@ -40,5 +40,5 @@ jobs:
       - run: |
           GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.32.0
           export PATH=~/go/bin:$PATH
-          make
+          make build
 
