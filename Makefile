@@ -20,6 +20,7 @@ build:
 	kubectl apply -f ./deployment.yaml
 	sleep 2
 	kubectl get pods -A
+	kubectl describe pod `kubectl get pod -l app=test-app -o jsonpath="{.items[0].metadata.name}"`
 
 
 define get-host-alias-ip
