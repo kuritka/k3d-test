@@ -12,7 +12,7 @@ run:
 	@echo "\n$(YELLOW)build docker and push to registry $(NC)"
 	docker build . -t aaa:v0.0.1
 	docker tag aaa:v0.0.1 registry.localhost:5000/aaa:v0.0.1
-	docker push localhost:5000/k8gb:v0.0.1
+	docker push registry.localhost:5000/k8gb:v0.0.1
 
 
 
