@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: kuritka/k3d-action@v1.0.1
+      - uses: kuritka/k3d-action@v1.0.2
         name: "Create 1st k3d Cluster with Registry"
         with:
           k3d-name: "test-cluster-1"
@@ -17,7 +17,7 @@ jobs:
             --agents 1
             --no-lb
             --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
-      - uses: kuritka/k3d-action@v1.0.1
+      - uses: kuritka/k3d-action@v1.0.2
         name: "Create 2nd k3d Cluster with Registry"
         with:
           k3d-name: "test-cluster-2"
