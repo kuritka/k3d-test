@@ -31,9 +31,8 @@ endef
 
 
 define deploy-test-apps
-	kubectl apply -f deploy/test-apps
 	helm repo add podinfo https://stefanprodan.github.io/podinfo
-	helm upgrade --install frontend --namespace test-gslb -f podinfo/podinfo-values.yaml \
+	helm upgrade --install frontend -f podinfo/podinfo-values.yaml \
 		--set ui.message="BLAH" \
 		--set image.repository=stefanprodan/podinfo \
 		podinfo/podinfo
