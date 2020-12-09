@@ -18,10 +18,10 @@ build:
 	docker rmi aaa:v0.0.1
 	docker pull registry.localhost:5000/aaa:v0.0.1
 	kubectl apply -f ./deployment.yaml
-	sleep 10
+	$(call deploy-test-apps)
+	sleep 15
 	kubectl get pods -A
 	kubectl describe pod `kubectl get pod -l app=test-app -o jsonpath="{.items[0].metadata.name}"`
-	$(call deploy-test-apps)
 
 define get-host-alias-ip
 	kubectl config use-context $2 > /dev/null && \
