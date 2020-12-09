@@ -18,7 +18,7 @@ build:
 	docker rmi aaa:v0.0.1
 	docker pull registry.localhost:5000/aaa:v0.0.1
 	kubectl apply -f ./deployment.yaml
-	sleep 2
+	sleep 5
 	kubectl get pods -A
 	kubectl describe pod `kubectl get pod -l app=test-app -o jsonpath="{.items[0].metadata.name}"`
 
