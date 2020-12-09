@@ -18,6 +18,7 @@ build:
 	docker rmi aaa:v0.0.1
 	docker pull registry.localhost:5000/aaa:v0.0.1
 	kubectl apply -f ./deployment.yaml
+	kubectl get pods -A
 
 
 define get-host-alias-ip
