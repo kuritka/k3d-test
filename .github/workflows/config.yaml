@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: AbsaOSS/k3d-action@v1.2.0
+      - uses: AbsaOSS/k3d-action@8-feature
         name: "Create 1st k3d Cluster with Registry"
         with:
           cluster-name: "test-cluster-1"
           use-default-registry: true
           args: --config1.yaml
-      - uses: AbsaOSS/k3d-action@v1.0.0
+      - uses: AbsaOSS/k3d-action@8-feature
         name: "Create 2nd k3d Cluster with Registry"
         with:
           cluster-name: "test-cluster-2"
