@@ -13,7 +13,7 @@ build:
 	@echo "\n$(YELLOW)build docker and push to registry $(NC)"
 	docker build . -t localhost:5000/aaa:v0.0.1
 	docker push localhost:5000/aaa:v0.0.1
-	docker rmi aaa:v0.0.1
+	docker rmi localhost:5000/aaa:v0.0.1
 	docker pull localhost:5000/aaa:v0.0.1
 	kubectl apply -f ./deployment.yaml
 	$(call deploy-test-apps)
