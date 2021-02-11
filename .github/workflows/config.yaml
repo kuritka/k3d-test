@@ -13,19 +13,13 @@ jobs:
         with:
           cluster-name: "test-cluster-1"
           use-default-registry: true
-          args: >-
-            --agents 1
-            --no-lb
-            --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
+          args: --config1.yaml
       - uses: AbsaOSS/k3d-action@v1.0.0
         name: "Create 2nd k3d Cluster with Registry"
         with:
           cluster-name: "test-cluster-2"
           use-default-registry: true
-          args: >-
-            --agents 1
-            --no-lb
-            --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
+          args: --config2.yaml
 
       - name: Nodes
         # hack, wait until agents are ready.
