@@ -1,10 +1,10 @@
-name: Multicluster test
+name: Multicluster test ConfiG
 
 on:
   [workflow_dispatch, push]
 jobs:
   k3d-inspect:
-    name: Multi-cluster test
+    name: Multi-cluster test CONFIG
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,13 +13,13 @@ jobs:
         with:
           cluster-name: "test-cluster-1"
           use-default-registry: true
-          args: --config1.yaml
+          args: --config=config1.yaml
       - uses: AbsaOSS/k3d-action@8-feature
         name: "Create 2nd k3d Cluster with Registry"
         with:
           cluster-name: "test-cluster-2"
           use-default-registry: true
-          args: --config2.yaml
+          args: --config=config2.yaml
 
       - name: Nodes
         # hack, wait until agents are ready.
