@@ -11,10 +11,10 @@ run:
 
 build:
 	@echo "\n$(YELLOW)build docker and push to registry $(NC)"
-	docker build . -t registry.localhost:5000/aaa:v0.0.1
-	docker push registry.localhost:5000/aaa:v0.0.1
+	docker build . -t localhost:5000/aaa:v0.0.1
+	docker push localhost:5000/aaa:v0.0.1
 	docker rmi aaa:v0.0.1
-	docker pull registry.localhost:5000/aaa:v0.0.1
+	docker pull localhost:5000/aaa:v0.0.1
 	kubectl apply -f ./deployment.yaml
 	$(call deploy-test-apps)
 	sleep 15
