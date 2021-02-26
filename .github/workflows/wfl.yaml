@@ -11,4 +11,7 @@ jobs:
         name: SIMPLE
         with:
           cluster-name: "cmak"
+          args: >-
+            --no-lb
+            --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
       - run: kubectl get nodes
