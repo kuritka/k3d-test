@@ -7,7 +7,7 @@ jobs:
     name: SIMPLE test
     runs-on: ubuntu-latest
     steps:
-      - uses: AbsaOSS/k3d-action@downgrade
+      - uses: AbsaOSS/k3d-action@v1.3.0
         name: SIMPLE
         with:
           cluster-name: "cmak"
