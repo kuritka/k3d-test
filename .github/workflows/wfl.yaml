@@ -11,5 +11,4 @@ jobs:
         name: SIMPLE
         with:
           cluster-name: "cmak"
-          args: --config=.github/k3d.yaml
       - run: kubectl get nodes
