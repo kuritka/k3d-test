@@ -4,13 +4,12 @@ on:
   [workflow_dispatch, push]
 jobs:
   k3d-inspect:
-    name: Multi-cluster test
+    name: SIMPLE test
     runs-on: ubuntu-latest
     steps:
       - uses: AbsaOSS/k3d-action@v1.3.0
-        name: create cluster
+        name: SIMPLE
         with:
           cluster-name: "cmak"
-          args: --config=k3d.yaml
-      - run:
-          kubectl get nodes
+          args: --config=.github/k3d.yaml
+      - run: kubectl get nodes
