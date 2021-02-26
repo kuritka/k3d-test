@@ -14,4 +14,4 @@ jobs:
           args: >-
             --no-lb
             --k3s-server-arg "--no-deploy=traefik,servicelb,metrics-server"
-      - run: sleep 3 && kubectl get nodes
+      - run: kubectl get nodes
