@@ -7,7 +7,7 @@ jobs:
     name: SIMPLE test
     runs-on: ubuntu-latest
     steps:
-      - uses: kuritka/doge-action@v0.0.11
+      - uses: kuritka/doge-action@v1.0.0-test02
         name: DOGE-ACTION
         with:
           cluster-name: "blaaah"
