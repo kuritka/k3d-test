@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: go action
-        run: go version
+        run: go run main.go
       - uses: kuritka/doge-action@v0.0.2
         name: DOGE-ACTION
         with:
